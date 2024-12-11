@@ -15,8 +15,8 @@ set -xe
 
 mkdir -p $DEMOS_UPLOAD_DIR
 
-cat Config.json | jq ".token = \"$TOKEN\" | .database={"host": \"$DB_HOST\", "user": \"$DB_USER\", "port": \"$DB_PORT\", "database": \"$DB_NAME\", "password": \"$DB_PASS\"} | .demos={"CleanType": \"$DEMOS_CLEAN_TYPE\", "DaysOrCount": $DEMOS_DAYS_OR_COUNT, "TimeClear": $DEMOS_TIME_CLEAR, "UploadDir": \"$DEMOS_UPLOAD_DIR\"}" > Config.json
-
-cat Config.json
+jq ".token = \"$TOKEN\" | .database={"host": \"$DB_HOST\", "user": \"$DB_USER\", "port": \"$DB_PORT\", "database": \"$DB_NAME\", "password": \"$DB_PASS\"} | .demos={"CleanType": \"$DEMOS_CLEAN_TYPE\", "DaysOrCount": $DEMOS_DAYS_OR_COUNT, "TimeClear": $DEMOS_TIME_CLEAR, "UploadDir": \"$DEMOS_UPLOAD_DIR\"}" Config.json > new_config.json
+rm Config.json
+mv new_config.json Config.json
 
 node demos.js
