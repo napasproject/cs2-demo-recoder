@@ -12,13 +12,6 @@ const   FS = require('fs'),
 
 let CFG = {};
 
-console.log = (log) =>
-{
-    let LogFile = FS.createWriteStream(`./demo_handler.log`, {flags : 'a+'});
-    let date = new Date();
-    LogFile.write(`[${date.toLocaleString('ru-RU')}]: ${log}\n`);
-}
-
 FS.readFile('./Config.json', {encoding:'utf8', flag:'r'}, async (err, data) =>
 {
     if (err)
